@@ -16,6 +16,8 @@ async function getData() {
   }
 }
 
+//new comment
+
 const page: React.FC = async () => {
   const data = await getData();
   console.log(data, "polo");

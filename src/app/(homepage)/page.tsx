@@ -1,7 +1,19 @@
-import React from "react";
+import { sql } from "@vercel/postgres";
 
-const page: React.FC = () => {
-  return <div>page</div>;
-};
+export default async function Cart({
+  params
+} : {
+  params: { user: string }
+}): Promise<JSX.Element> {
+  const { rows } = await sql`SELECT * from carts where id=${params.user}`;
 
-export default page;
+  return (
+    <div>
+      {rows.map((row) => (
+        <div key={row.id}>
+          {row.id} - {row.quantity}
+        </div>
+      ))}
+    </div>
+  );
+}
